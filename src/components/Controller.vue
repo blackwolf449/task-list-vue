@@ -51,6 +51,15 @@ export default {
         ? []
         : JSON.parse(localStorage.getItem("taskList"));
       taskArray[index].finished = true;
+      taskArray.sort((a) => {
+        if (a.finished == true) {
+          return 1;
+        }
+        if (a.finished == false) {
+          return -1;
+        }
+        return 0;
+      });
       localStorage.setItem("taskList", JSON.stringify(taskArray));
       location.reload();
     },

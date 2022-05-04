@@ -43,8 +43,16 @@ export default {
         this.taskDate
       );
       taskArray.push(task);
+      taskArray.sort((a) => {
+        if (a.finished == true) {
+          return 1;
+        }
+        if (a.finished == false) {
+          return -1;
+        }
+        return 0;
+      });
       localStorage.setItem("taskList", JSON.stringify(taskArray));
-      console.log(taskArray);
     },
   },
 };
