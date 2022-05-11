@@ -40,18 +40,23 @@ export default {
   components: { FormTask },
   data() {
     return {
-      tasks: JSON.parse(localStorage.getItem("taskList")),
+      tasks: JSON.parse(localStorage.getItem("taskRend")),
       showForm: false,
     };
   },
   methods: {
     finishedTask(id) {
       const index = id - 1;
+      console.log(index)
       const taskArray = !localStorage.getItem("taskList")
         ? []
         : JSON.parse(localStorage.getItem("taskList"));
       taskArray[index].finished = true;
-      taskArray.sort((a) => {
+      const taskRend = []
+      for(let i = 0; i < taskArray.length; i++){
+        taskRend.push(taskArray[taskArray[i].id - 1])
+      }
+      taskRend.sort((a) => {
         if (a.finished == true) {
           return 1;
         }
@@ -61,6 +66,7 @@ export default {
         return 0;
       });
       localStorage.setItem("taskList", JSON.stringify(taskArray));
+      localStorage.setItem("taskRend", JSON.stringify(taskRend));
       location.reload();
     },
     formShow() {

@@ -43,7 +43,11 @@ export default {
         this.taskDate
       );
       taskArray.push(task);
-      taskArray.sort((a) => {
+      const taskRend = []
+      for(let i = 0; i < taskArray.length; i++){
+        taskRend.push(taskArray[taskArray[i].id - 1])
+      }
+      taskRend.sort((a) => {
         if (a.finished == true) {
           return 1;
         }
@@ -53,6 +57,7 @@ export default {
         return 0;
       });
       localStorage.setItem("taskList", JSON.stringify(taskArray));
+      localStorage.setItem("taskRend", JSON.stringify(taskRend));
     },
   },
 };
